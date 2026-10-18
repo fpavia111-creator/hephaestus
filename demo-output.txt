@@ -1,0 +1,75 @@
+
+=== 1. lint the original (weak) skill
+$ skillship lint /tmp/skillship-demo-f9qly4wu/invoice-chaser
+[ERROR] E011 name 'Invoice-Chaser' must be 1-64 chars of a-z, 0-9 and single hyphens
+[WARN ] W022 description under 80 chars; usually too vague to trigger reliably
+[WARN ] W023 description should say WHEN to use it (e.g. 'Use when ...')
+[WARN ] W032 unknown frontmatter field 'author' (ignored silently by Claude Code)
+[WARN ] W041 body is very short; buyers expect concrete steps, examples and edge cases
+[ERROR] E051 referenced file missing: references/tone.md
+[WARN ] W070 no license field or LICENSE file; buyers/marketplaces expect one
+
+FAIL: 2 error(s), 5 warning(s) 
+[exit 1]
+
+=== 2. offline trigger check, original description
+$ skillship triggers /tmp/skillship-demo-f9qly4wu/invoice-chaser
+BAD expect=fire score=0.14  draft a friendly payment reminder for clients with overdue invoices  missing: client, draft, friendly, overdue, payment, reminder
+BAD expect=fire score=0.00  which customers haven't paid their bills yet? chase them by email  missing: bill, chase, customer, email, haven, paid
+BAD expect=fire score=0.12  write a follow-up email for the unpaid invoice from Acme, it's 30 days  missing: acme, days, email, follow, late, unpaid
+BAD expect=fire score=0.12  send a dunning reminder to everyone past due in invoices.csv  missing: csv, due, dunning, everyone, past, reminder
+ok  expect=skip score=0.14  create a new invoice template in Word for my consulting business
+ok  expect=skip score=0.00  summarize this quarterly revenue spreadsheet
+ok  expect=skip score=0.00  write a cold outreach email to a new prospect
+ok  expect=skip score=0.00  convert this CSV of contacts to JSON
+
+4/8 cases match (heuristic, threshold 0.25) 
+[exit 1]
+
+=== applied fixes: lowercase name, rewritten description, license, steps, references/tone.md
+
+=== 3. lint after fixes
+$ skillship lint /tmp/skillship-demo-f9qly4wu/invoice-chaser
+
+PASS: 0 error(s), 0 warning(s) 
+[exit 0]
+
+=== 4. trigger check after fixes
+$ skillship triggers /tmp/skillship-demo-f9qly4wu/invoice-chaser
+ok  expect=fire score=0.57  draft a friendly payment reminder for clients with overdue invoices
+ok  expect=fire score=0.70  which customers haven't paid their bills yet? chase them by email
+ok  expect=fire score=0.38  write a follow-up email for the unpaid invoice from Acme, it's 30 days
+ok  expect=fire score=0.38  send a dunning reminder to everyone past due in invoices.csv
+ok  expect=skip score=0.00  create a new invoice template in Word for my consulting business
+ok  expect=skip score=0.00  summarize this quarterly revenue spreadsheet
+ok  expect=skip score=0.00  write a cold outreach email to a new prospect
+BAD expect=skip score=0.25  convert this CSV of contacts to JSON  missing: contact, convert, json
+
+7/8 cases match (heuristic, threshold 0.25) 
+[exit 1]
+
+=== 5. build release
+$ skillship build /tmp/skillship-demo-f9qly4wu/invoice-chaser --version 1.0.0 --author Kurt Francisco --out /tmp/skillship-demo-f9qly4wu/dist
+{
+  "name": "invoice-chaser",
+  "version": "1.0.0",
+  "release_zip": "invoice-chaser-1.0.0.zip",
+  "release_sha256": "59d6605f03ee928aa72868d0f9f1d54de4ce30d4ca0e267891dd5032a6905e41"
+}
+9 artifact files written 
+[exit 0]
+
+files:
+  dist/invoice-chaser-1.0.0.zip
+  dist/invoice-chaser-1.0.0/invoice-chaser-claude-ai.zip
+  dist/invoice-chaser-1.0.0/manifest.json
+  dist/invoice-chaser-1.0.0/plugin-marketplace/.claude-plugin/marketplace.json
+  dist/invoice-chaser-1.0.0/plugin-marketplace/plugins/invoice-chaser/.claude-plugin/plugin.json
+  dist/invoice-chaser-1.0.0/plugin-marketplace/plugins/invoice-chaser/skills/invoice-chaser/SKILL.md
+  dist/invoice-chaser-1.0.0/plugin-marketplace/plugins/invoice-chaser/skills/invoice-chaser/references/tone.md
+  dist/invoice-chaser-1.0.0/plugin-marketplace/plugins/invoice-chaser/skills/invoice-chaser/scripts/overdue.py
+  dist/invoice-chaser-1.0.0/skill/invoice-chaser/SKILL.md
+  dist/invoice-chaser-1.0.0/skill/invoice-chaser/references/tone.md
+  dist/invoice-chaser-1.0.0/skill/invoice-chaser/scripts/overdue.py
+
+Pro (watermark, identify, listing) is sold separately: <LS_URL>

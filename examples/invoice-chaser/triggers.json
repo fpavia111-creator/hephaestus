@@ -1,0 +1,10 @@
+[
+  {"query": "draft a friendly payment reminder for clients with overdue invoices", "should_trigger": true},
+  {"query": "which customers haven't paid their bills yet? chase them by email", "should_trigger": true},
+  {"query": "write a follow-up email for the unpaid invoice from Acme, it's 30 days late", "should_trigger": true},
+  {"query": "send a dunning reminder to everyone past due in invoices.csv", "should_trigger": true},
+  {"query": "create a new invoice template in Word for my consulting business", "should_trigger": false},
+  {"query": "summarize this quarterly revenue spreadsheet", "should_trigger": false},
+  {"query": "write a cold outreach email to a new prospect", "should_trigger": false},
+  {"query": "convert this CSV of contacts to JSON", "should_trigger": false}
+]

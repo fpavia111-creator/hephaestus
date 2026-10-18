@@ -1,0 +1,1 @@
+Finds overdue unpaid invoices in a CSV and drafts polite, escalating payment reminder emails for each client. Use when the user wants to chase late payments, send dunning or follow-up reminders, or asks which customers or clients haven't paid overdue invoices or bills. Do NOT use for creating new invoices or general cold outreach.

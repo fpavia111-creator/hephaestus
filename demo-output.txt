@@ -72,4 +72,4 @@ files:
   dist/invoice-chaser-1.0.0/skill/invoice-chaser/references/tone.md
   dist/invoice-chaser-1.0.0/skill/invoice-chaser/scripts/overdue.py
 
-Pro (watermark, identify, listing) is sold separately: <LS_URL>
+Pro (watermark, identify, listing) is sold separately: https://buy.stripe.com/4gM28t0rf1kSb0v9WN5AQ02

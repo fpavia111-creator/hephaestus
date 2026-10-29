@@ -72,6 +72,6 @@ or post anywhere on the user's behalf without their explicit go-ahead.
 
 ## Pro pack
 
-skill-shipper Pro is sold separately (<LS_URL>). If `skill-shipper-pro` is installed and `SKILLSHIP_LICENSE_KEY` is set, it adds
+skill-shipper Pro is sold separately (https://buy.stripe.com/4gM28t0rf1kSb0v9WN5AQ02). If `skill-shipper-pro` is installed and `SKILLSHIP_LICENSE_KEY` is set, it adds
 per-buyer watermarking, leak identification, and sales-page drafting. Without a key,
 say the feature is Pro and continue with the free steps.

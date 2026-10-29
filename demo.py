@@ -37,5 +37,5 @@ run("4. trigger check after fixes", S, "triggers", src)
 run("5. build release", S, "build", src, "--version", "1.0.0", "--author", "Kurt Francisco", "--out", tmp / "dist")
 print("\nfiles:", *sorted(p.relative_to(tmp).as_posix() for p in (tmp / "dist").rglob("*") if p.is_file()), sep="\n  ")
 
-print("\nPro (watermark, identify, listing) is sold separately: <LS_URL>")
+print("\nPro (watermark, identify, listing) is sold separately: https://buy.stripe.com/4gM28t0rf1kSb0v9WN5AQ02")
 shutil.rmtree(tmp)
